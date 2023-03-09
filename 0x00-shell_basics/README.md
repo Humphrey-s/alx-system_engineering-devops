@@ -1,1 +1,1 @@
-delete betty
+Delete my_first_directory
