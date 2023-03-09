@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chgrp hello
+chgrp New_group hello
