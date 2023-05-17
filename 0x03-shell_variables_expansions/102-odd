@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -v | awk "NR%2!=0"
+ls -v | perl -ne 'print if $. % 2 == 1' 
