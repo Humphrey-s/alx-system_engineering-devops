@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -v | perl -ne 'print if $. % 2 == 1' 
+ls -v | perl -ne 'print if $. % 2 != 0' 
