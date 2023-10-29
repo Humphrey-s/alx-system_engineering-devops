@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#display the pid along with proc name whose name contain word bash
+pgrep -l bash
