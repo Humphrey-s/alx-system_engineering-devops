@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#prints "i am invicible" after receiving a sigint
+
+function i_am_invicible 
+{
+	echo "i am invicible"
+}
+
+trap 'echo "i am invicible"'  SIGTERM
+
+while (true);
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
