@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #prints "i am invicible" after receiving a sigint
-trap 'echo "i am invicible!!!"'  SIGTERM
+trap 'echo "I am invincible!!!"'  SIGTERM
 
 while (true);
 do
