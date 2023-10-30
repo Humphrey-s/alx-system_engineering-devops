@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#display contents of a dir with specification
+LIST="$(ls ./)"
+
+for i in $LIST;
+do
+	echo "$i" >> file
+	b=$(cut -d "-" -f 2 file)
+	echo "$b"
+	rm -r file
+done
