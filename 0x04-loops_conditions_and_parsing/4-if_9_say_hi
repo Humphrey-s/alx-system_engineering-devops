@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Best School but on 9th "Hi"
+
+i=0
+
+while [ $i -ne 10 ]
+do
+	echo "Best School"
+
+	if [ $i -eq 8 ];
+	then
+		echo "hi"
+	fi
+	((i++))
+done
