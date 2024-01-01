@@ -1,0 +1,4 @@
+#!/usr//bin/env bash
+#find pid of users current shell
+
+echo $$
