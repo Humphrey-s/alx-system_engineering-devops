@@ -9,7 +9,7 @@ do
 
 	if [ $i -eq 8 ];
 	then
-		echo "hi"
+		echo "Hi"
 	fi
 	((i++))
 done
