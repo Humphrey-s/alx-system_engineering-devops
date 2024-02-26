@@ -1,5 +1,5 @@
-Host alx
-         HostName 54.146.95.211
-         User ubuntu
-         BatchMode yes
-         IdentityFile ~/.ssh/school
+Host web
+	HostName 100.27.11.188
+	User ubuntu
+	BatchMode yes
+	IdentityFile ~/.ssh/school
