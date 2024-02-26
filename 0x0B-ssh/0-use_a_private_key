@@ -1,0 +1,4 @@
+#!/bin/bash
+# uses ssh to connect to server using private key ~/.ssh/school
+
+ssh -i ~/.ssh/school ubuntu@100.27.11.188
