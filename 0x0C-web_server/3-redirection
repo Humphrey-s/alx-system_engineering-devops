@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Nginx to redir /redirect_me is redirecting to another page
+
+sudo apt-get install nginx -y
+sudo bash -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+
+a="\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n"
+
+sudo sed -i "53s|.*|$a|" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
