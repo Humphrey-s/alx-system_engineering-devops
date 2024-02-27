@@ -11,4 +11,4 @@ if [ $# -ne 4 ]; then
 	exit
 fi
 
-scp -i $id_rsa -q $file_path -j $username@$server_ip:~/
+scp -i $id_rsa -q $file_path $username@$server_ip:~/
