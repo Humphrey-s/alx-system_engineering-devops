@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Bash script that transfers a file from our client to a server:
+
+file_path=$1
+server_ip=$2
+username=$3
+id_rsa=$4
+
+if [ $# -ne 4 ]; then
+	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+	exit
+fi
+
+scp -i $id_rsa -q $file_path -j $username@$server_ip:~/
