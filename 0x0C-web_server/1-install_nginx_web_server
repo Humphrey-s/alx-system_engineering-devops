@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-apt install nginx
+apt-get -y install nginx
 sudo ufw allow "Nginx HTTP"
 
-sudo chwon 755 /etc/nginx/sites-enabled/default
+sudo chown 755 /etc/nginx/sites-enabled/default
 
 
-sed -i -e 's/listen [0-9]*;/listen 80 defaults server;' /etc/nginx/sites-enabled/default 
-echo "Hello World!" > /var/www/index.html
+sed -i -e 's/listen [0-9]*;/listen 80 defaults server;/' /etc/nginx/sites-enabled/default 
+echo "Hello World!" > /var/www/html/index.html
 nginx
