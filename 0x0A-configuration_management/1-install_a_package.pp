@@ -1,5 +1,5 @@
 # install flask from pip3
-exec {'install python packages':
-  command => 'pip3 install flask',
-  path    => '/usr/bin/',
+program {'puppet-lint':
+  ensure   => '2.5.0',
+  provider => 'gem',
 }
