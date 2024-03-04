@@ -1,0 +1,27 @@
+#!/bin/env bash
+# install and configure nginx on web-02 server
+
+apt update -y
+apt install nginx
+apt install nginx-extras -y
+sudo ufw allow "Nginx HTTP"
+
+chown -R $USER:$USER /var/www/html
+chmod -R 755 /var/www
+sudo chown  $USER:$USER /etc/nginx/sites-available/
+
+sed -i -e 's/listen [0-9]*;/listen 80 default-server;/' /etc/nginx/sites-enabled/default 
+echo "Hello World!!!" > /var/www/html/index.html
+
+if [ ! -d /var/www/error ];
+then
+	mkdir /var/www/error
+fi
+
+echo "Ceci n'est pas une page" > /var/www/error/404.html
+sed -i '/server_name _/a location /redirect_me { rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlw\u4? permanent; }' /etc/nginx/sites-available/default
+sed -i '/server_name _/a error_page 404 /404.html; location = /404.html {root /var/www/error/; internal; }' /etc/nginx/sites-available/default
+
+
+sed -i -e '/server_name _/a\\t add_header X-Served-By $HOSTNAME;' /etc/nginx/sites-enabled/default
+service nginx restart
