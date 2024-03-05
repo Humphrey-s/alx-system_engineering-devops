@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Install nginx on your web-01
 
-sudo -i
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow "Nginx HTTP"
@@ -11,5 +10,5 @@ sudo chmod -R 755 /var/www/html
 
 sed -i -e 's/listen [0-9]*;/listen 80 defaults server;/' /etc/nginx/sites-enabled/default 
 echo "Hello World!" > index.html
-sudo mv index.html /var/www/html
+sudo mv index.html /var/www/html/index.html
 service nginx restart;
