@@ -8,6 +8,6 @@ sudo ufw allow "Nginx HTTP"
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
-sed -i -e 's/listen [0-9]*;/listen 80 defaults server;/' /etc/nginx/sites-enabled/default 
+sed -i -e 's/listen [0-9]*;/listen 80 defaults server;~' /etc/nginx/sites-enabled/default 
 echo "Hello World!" > /var/www/html/index.html
 service nginx start;
