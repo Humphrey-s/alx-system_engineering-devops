@@ -7,8 +7,9 @@ sudo apt-get install -y nginx
 echo "Hello World!" > index.html
 
 sudo mv index.html /var/www/html
+chmod ugo+wr /var/www/html/404.html
 
-echo "Ceci n'est pas une page" > /var/www/html/404.html
+sudo echo "Ceci n'est pas une page" > /var/www/html/404.html
 
 echo "server {
    listen 80 default_server;
