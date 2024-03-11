@@ -2,42 +2,43 @@
 # install and configure nginx on web-02 server
 
 apt-get update -y
-apt-get install nginx -y
-sudo apt-get remove --auto-remove nginx-extras -y
-sudo ufw allow "Nginx HTTP"
+#apt-get install nginx -y
+#sudo apt-get remove --auto-remove nginx-extras -y
 
-chown -R "$USER":"$USER" /var/www/html/
-chmod -R 755 /var/www
-sudo chown  "$USER":"$USER" /etc/nginx/sites-available/
+#sudo ufw allow "Nginx HTTP"
 
-sed -i -e 's/listen [0-9]*;/listen 80 default-server;/' /etc/nginx/sites-enabled/default 
-echo "Hello World!!!" > /var/www/html/index.html
+#chown -R "$USER":"$USER" /var/www/html/
+#chmod -R 755 /var/www
+#sudo chown  "$USER":"$USER" /etc/nginx/sites-available/
 
-if [ ! -d /var/www/error ];
-then
-	mkdir /var/www/error
-	sudo chown  "$USER":"$USER" /var/www/error/
-fi
+#sed -i -e 's/listen [0-9]*;/listen 80 default-server;/' /etc/nginx/sites-enabled/default 
+#echo "Hello World!!!" > /var/www/html/index.html
 
-echo "Ceci n'est pas une page" > /var/www/html/404.html
+#if [ ! -d /var/www/error ];
+#then
+#	mkdir /var/www/error
+#	sudo chown  "$USER":"$USER" /var/www/error/
+#fi
 
-echo "server {
-   listen 80 default_server;
-   listen [::]:80 default_server;
+#echo "Ceci n'est pas une page" > /var/www/html/404.html
 
-   root /var/www/html;
-   index index.html;
-   location /redirect_me {
-      return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-   }
-   error_page 404 /404.html;
+#echo "server {
+#  listen 80 default_server;
+#   listen [::]:80 default_server;
 
-   location = /404.html{
-      internal;
-   }
-}" > default
+#   root /var/www/html;
+#   index index.html;
+#   location /redirect_me {
+#      return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+#   }
+#   error_page 404 /404.html;
 
-sudo mv default /etc/nginx/sites-available/default
+#   location = /404.html{
+#      internal;
+#   }
+#}" > default
 
-sed -i -e "/server_name _/a\\t add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
-service nginx restart
+#sudo mv default /etc/nginx/sites-available/default
+
+#sed -i -e "/server_name _/a\\t add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+#service nginx restart/etc/nginx/sites-enabled/default
