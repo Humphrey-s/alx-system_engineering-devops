@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# prints the subdomains of a a website
+
+prod () {
+	output=$(dig "$2.$1")
+	p=$(grep -A1 'ANSWER SECTION:' <<< "$output")
+	record=$(awk '{printf "%s", $4}' <<< "$p")
+	ip=$(awk '{printf "%s", $5}' <<< "$p")
+	echo -e "The subdomain $2 is a $record record and points to $ip"
+}
+
+if [ $# -eq 1 ];
+then
+	prod "$1" "www"
+	prod "$1" "lb-01"
+	prod "$1" "web-01"
+	prod "$1" "web-02"
+elif [ $# -eq 2 ];
+then
+	prod "$1" "$2"
+fi
