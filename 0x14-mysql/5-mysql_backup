@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# create mysql database backup
+sudo mysqldump -uroot -p$1 -e --all-databases > backup.sql
+tar cvfz "$(date +%d-%m-%y).tar.gz" backup.sql 
