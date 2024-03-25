@@ -20,5 +20,5 @@ if __name__ == "__main__":
     titles = ([lst['title'] for lst in todo if lst['completed'] is True])
     user = users["name"]
 
-    print(f"Employee {user} is done with tasks({completed}/{tasks})")
-    [print(f"\t{task}") for task in titles]
+    print(f"Employee {user} is done with tasks({completed}/{tasks}):")
+    [print(f"    {task}") for task in titles]
