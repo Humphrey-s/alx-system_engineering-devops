@@ -21,4 +21,4 @@ if __name__ == "__main__":
     user = users["name"]
 
     print(f"Employee {user} is done with tasks({completed}/{tasks}):")
-    [print(f"    {task}") for task in titles]
+    [print(f"\t {task}") for task in titles]
