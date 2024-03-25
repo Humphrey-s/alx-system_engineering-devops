@@ -20,4 +20,4 @@ if __name__ == "__main__":
         writer = csv.writer(f, quoting=csv.QUOTE_ALL)
 
         for lst in todo:
-            writer.writerow([sys.argv[1], lst["completed"], lst['title']])
+            writer.writerow([sys.argv[1], users['username'], lst["completed"], lst['title']])
