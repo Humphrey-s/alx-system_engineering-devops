@@ -22,7 +22,6 @@ if __name__ == "__main__":
 
     for lst in todo:
 
-        dic_t['username'] = users["username"]
         dic_t['task'] = lst['title']
         dic_t['completed'] = lst['completed']
 
