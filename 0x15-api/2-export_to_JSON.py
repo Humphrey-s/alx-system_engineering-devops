@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
         dic_t['task'] = lst['title']
         dic_t['completed'] = lst['completed']
-
+        dic_t['username'] = users['username']
         dict_lst.append(dic_t)
         dic_t = {}
 
