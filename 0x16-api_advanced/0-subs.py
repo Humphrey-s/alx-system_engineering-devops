@@ -9,10 +9,12 @@ def number_of_subscribers(subreddit):
 
     if subreddit is None:
         return 0
-    try:
-        url = f"https://www.reddit.com/r/{subreddit}/about.json"
-        response = requests.get(url)
+
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    response = requests.get(url, headers={"User-Agent": "Custom"})
+
+    if response.status_code == 200:
         dct = response.json()
         return dct['data']['subscribers']
-    except Exception as e:
+    else:
         return 0
