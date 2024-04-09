@@ -10,14 +10,14 @@ def top_ten(subreddit):
     if subreddit is None:
         return 0
 
-    try:
-        url = "https://www.reddit.com/r/{}/top.json?limit=10".format(subreddit)
+    url = "https://www.reddit.com/r/{}/top.json?limit=10".format(subreddit)
+    header =  header = {"User-Agent": "Custom"}
+    with requests.get(url, headers=header) as r:
 
-        with requests.get(url) as r:
-            posts = r.json()['data']['children']
+        if r.status_code != 200:
+            return None
 
-            for post in posts:
-                title = post['data']['title']
-                print(title)
-    except Exception as e:
-        print(e)
+        posts = r.json()['data']['children']
+        for post in posts:
+            title = post['data']['title']
+            print(title)
