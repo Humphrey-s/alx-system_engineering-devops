@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Terminating SSL on HAproxy
+
+sudo apt-get -y update
+sudo apt-get install certbot -y
+
+
+sudo service haproxy stop
+netstat -na | grep ':80.*LISTEN'
+
+sudo certbot certonly --standalone --preferred-challenges http --http-01-port 80 -d humwebstack.tech -d www.humwebstack.tech
+
+sudo mkdir -p /etc/haproxy/certs
+
+DOMAIN='humwebstack.tech' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
+
+sudo chmod -R go-rwx /etc/haproxy/certs
+sudo chown -R ubuntu:ubuntu /etc/haproxy/certs
+
+sudo sed -i -e '60i frontend www-https\n\tbind *:443 ssl crt /etc/haproxy/certs/humwebstack.tech\n\thttp-request add-header X-Forwarded-Proto https\n\tacl letsencrypt-acl path_beg /.well-known/acme-challenge///t'
