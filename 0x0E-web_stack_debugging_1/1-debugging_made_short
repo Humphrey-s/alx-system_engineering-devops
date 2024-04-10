@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# makes nginx listen on port 80
+sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 80
+sudo service nginx restart
