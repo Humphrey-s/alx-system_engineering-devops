@@ -2,8 +2,9 @@
 # makes nginx listen on port 80
 
 sudo ufw allow 80
+sudo ufw allow 'Nginx HTTP'
 sudo sed -i '22d' /etc/nginx/sites-enabled/default
 sudo sed -i '22d' /etc/nginx/sites-enabled/default
-sudo sed -i $'22i \tlisten 80 default_server;' /etc/nginx/sites-enabled/default 
-sudo -i $'23i \tlisten [::]:80 default_server;' /etc/nginx/sites-enabled/default
-sudo service restart nginx
+sudo sed -i '22i listen 80 default_server;' /etc/nginx/sites-enabled/default 
+sudo sed -i '23i listen [::]:80 default_server;' /etc/nginx/sites-enabled/default
+sudo service nginx restart
