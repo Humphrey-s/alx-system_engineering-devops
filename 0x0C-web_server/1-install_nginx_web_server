@@ -8,7 +8,6 @@ sudo ufw allow "Nginx HTTP"
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www/html
 
-sed -i -e 's/listen [0-9]*;/listen 80 defaults server;/' /etc/nginx/sites-enabled/default 
-echo "Hello World!" > index.html
-sudo mv index.html /var/www/html/index.html
+#sed -i -e 's/listen [0-9]*;/listen 80 defaults server;/' /etc/nginx/sites-enabled/default
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
 service nginx restart;

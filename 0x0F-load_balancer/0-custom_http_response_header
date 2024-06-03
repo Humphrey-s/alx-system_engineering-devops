@@ -2,3 +2,16 @@
 # install and configure nginx on web-02 server
 
 sudo apt-get -y update
+sudo apt-get -y install nginx
+
+sudo mkdir /var/www/errors
+sudo echo "Ceci n'est pas une page" > /var/www/errors/404.html
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+sudo sed -i -e $'/server_name _;/a \tadd_header X-Served-By $HOSTNAME;' /etc/nginx/sites-enabled/default
+sudo sed -i -e $'/add_header X-Served-By $HOSTNAME;/a error_page 404 /404.html;' /etc/nginx/sites-enabled/default
+sudo sed -i -e '/404.html;/a location = /404.html {' /etc/nginx/sites-enabled/default
+sudo sed -i -e '/html {/a root /var/www/errors;' /etc/nginx/sites-enabled/default
+sudo sed -i -e '/errors;/a internal; }' default
+sudo sed -i -e '/internal; }/alocation = /redirect_me/ {' /etc/nginx/sites-enabled/default
+sudo sed -i '/redirect_me\/ {/a return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/}' /etc/nginx/sites-enabled/default
