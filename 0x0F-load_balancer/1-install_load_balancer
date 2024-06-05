@@ -12,8 +12,8 @@ frontend my_frontend
     default_backend my_backend
 backend my_backend
     balance roundrobin
-    server 341982-web-01 100.26.161.115:80 check
-    server 341982-web-02 100.26.136.154:80 check" >> /etc/haproxy/haproxy.cfg
+    server 341982-web-01 18.207.112.206:80 check
+    server 341982-web-02 54.89.195.83:80 check" >> /etc/haproxy/haproxy.cfg
 
 sudo echo "ENABLED=1" >> /etc/default/haproxy
 sudo service haproxy restart
