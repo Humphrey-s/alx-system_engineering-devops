@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#Bash script that transfers a file from our client to a server:
+file_path=$1
+destination="$3@$2:~/"
+privateKey=$4
+
+scp -o StrictHostKeyChecking=no -i "$privateKey" "$file_path" "$destination"
