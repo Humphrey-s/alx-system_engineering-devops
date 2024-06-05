@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
-# install and configure nginx on web-02 server
+# Configure Nginx so that its HTTP response contains a custom header
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
+sudo ufw allow "Nginx HTTP"
+sudo chmod 755 /var/www/html/
+sudo echo "Hello World!" > /var/www/html/index.html
+#sudo service nginx restart
 
-sudo mkdir /var/www/errors
-sudo echo "Ceci n'est pas une page" > /var/www/errors/404.html
-sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
+a="\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n"
+sudo sed -i "53s|.*|$a|" /etc/nginx/sites-enabled/default
+#sudo service nginx restart
 
-sudo sed -i -e $'/server_name _;/a \tadd_header X-Served-By $HOSTNAME;' /etc/nginx/sites-enabled/default
-sudo sed -i -e $'/add_header X-Served-By $HOSTNAME;/a error_page 404 /404.html;' /etc/nginx/sites-enabled/default
-sudo sed -i -e '/404.html;/a location = /404.html {' /etc/nginx/sites-enabled/default
-sudo sed -i -e '/html {/a root /var/www/errors;' /etc/nginx/sites-enabled/default
-sudo sed -i -e '/errors;/a internal; }' default
-sudo sed -i -e '/internal; }/alocation = /redirect_me/ {' /etc/nginx/sites-enabled/default
-sudo sed -i '/redirect_me\/ {/a return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/}' /etc/nginx/sites-enabled/default
+
+b="\n\terror_page 404 /404.html;"
+c="\n\tlocation = /404.html {\n\t\troot /var/www/html/error/;\n\t\tinternal;\n}\n"
+
+sudo mkdir /var/www/html/error
+sudo chmod 755 /var/www/html/error
+sudo echo "Ceci n'est pas une page" > /var/www/html/error/404.html
+
+sudo sed -i "57s|.*|$b|" /etc/nginx/sites-enabled/default
+sudo sed -i "60s|.*|$c|" /etc/nginx/sites-enabled/default
+sudo service nginx restart
