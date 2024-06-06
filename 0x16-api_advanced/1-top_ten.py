@@ -13,7 +13,7 @@ def top_ten(subreddit):
 
     response = requests.get(url, headers=headers, allow_redirects=False)
 
-    if response.status_code != 200:
+    if response.status_code >= 300:
         print("None")
     else:
         posts = response.json().get("data").get("children")
