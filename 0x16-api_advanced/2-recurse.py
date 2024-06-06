@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/python3
 """returns a list containing the titles of all hot articles"""
 import requests
 
