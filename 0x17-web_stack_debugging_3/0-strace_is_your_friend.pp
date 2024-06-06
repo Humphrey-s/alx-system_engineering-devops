@@ -1,8 +1,6 @@
 # fix 500 internal error
-file {'/var/www/html/hum.php':
-  ensure  => 'present',
-  content => '500 error fixed',
-  mode    => '0744',
-  owner   => 'www-data',
-  group   => 'www-data',
+exec { 'fix-wordpress':
+  command     => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path        => ['/bin', '/usr/bin'],
+  logoutput   => true,
 }
