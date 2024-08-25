@@ -1,15 +1,22 @@
 #!/usr/bin/python3
-"""definition of number_of_subscribers"""
-from requests import get
+"""
+definition number_of_subscribers
+"""
+
+import requests
 
 
 def number_of_subscribers(subreddit):
-    """queries the Reddit API and returns the number of subscribers"""
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    r = get(url, allow_redirects=False, headers={"User-Agent": "Custom"})
+    """
+    queries the Reddit API
+    If not a valid subreddit, return 0.
+    """
+    r = requests.get(
+        "https://www.reddit.com/r/{}/about.json".format(subreddit),
+        headers={"User-Agent": "Custom"},
+    )
 
-    if r.status_code != 200:
-        return 0
+    if r.status_code == 200:
+        return r.json().get("data").get("subscribers")
     else:
-        data = r.json().get("data")
-        return data.get("subscribers")
+        return 0
