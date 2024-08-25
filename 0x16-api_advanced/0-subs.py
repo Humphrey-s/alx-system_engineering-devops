@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+"""definition of number_of_subscribers"""
 import requests
 
 
 def number_of_subscribers(subreddit):
     """queries the Reddit API and returns the number of subscribers"""
-    
+
     r = requests.get(f"https://www.reddit.com/r/{subreddit}/about.json")
 
     if r.status_code != 200:
