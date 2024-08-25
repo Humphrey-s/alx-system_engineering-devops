@@ -3,17 +3,25 @@
 import requests as r
 
 
-def recurse(subreddit, hot_list=[], after=0):
+def recurse(subreddit, hot_list=[], after="", count=0):
     """
     recursive function that queries the Reddit API
     returns a list containing the titles of all articles for a subreddit
     """
-    if after == 0:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    else:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json?after={after}"
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {"User-Agent": "Custom"}
+    params = {
+            "after": after,
+            "limit": 100,
+            "count": count
+            }
 
-    res = r.get(url, headers={"User-Agent": "Custom"}, allow_redirects=False)
+    res = r.get(
+            url,
+            headers={"User-Agent": "Custom"},
+            params=params,
+            allow_redirects=False
+            )
 
     if res.status_code == 404:
         return None
@@ -22,6 +30,8 @@ def recurse(subreddit, hot_list=[], after=0):
         for dct in lst:
             title = dct.get("data").get("title")
             hot_list.append(title)
+
+        count += res.json().get("data").get("dist")
 
         if res.json().get("data").get("after") is None:
             return hot_list
